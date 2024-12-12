@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, complainant_name, status FROM blotter_reports ORDER BY id DESC";
+$sql = "SELECT id, complainant_name, email, status FROM blotter_reports ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -202,6 +202,7 @@ $result = $conn->query($sql);
                     <tr>
                         <th>Blotter Number</th>
                         <th>Complainant's Name</th>
+                        <th>Email</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -211,6 +212,7 @@ $result = $conn->query($sql);
                         <tr>
                             <td><?php echo $row['id']; ?></td>
                             <td><?php echo htmlspecialchars($row['complainant_name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['email']); ?></td>
                             <td><?php echo htmlspecialchars($row['status']); ?></td>
                             <td>
                                 <a href="javascript:void(0);" onclick="fetchDetails(<?php echo $row['id']; ?>)">View Details</a>

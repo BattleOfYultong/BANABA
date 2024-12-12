@@ -23,6 +23,7 @@ $incident_location = $_POST['incident_location'];
 $incident_details = $_POST['incident_details'];
 $resident_type = $_POST['resident_type'];
 $status = $_POST['status'];
+$email = $_POST['email'];
 
 $complainant_name = $conn->real_escape_string($complainant_name);
 $complainant_address = $conn->real_escape_string($complainant_address);
@@ -35,13 +36,14 @@ $incident_location = $conn->real_escape_string($incident_location);
 $incident_details = $conn->real_escape_string($incident_details);
 $resident_type = $conn->real_escape_string($resident_type);
 $status = $conn->real_escape_string($status);
+$email = $conn->real_escape_string($email);
 
 $sql = "INSERT INTO blotter_reports (
             complainant_name, complainant_address, respondent_name, respondent_address, witnesses, 
-            incident_date, incident_time, incident_location, incident_details, resident_type, status
+            incident_date, incident_time, incident_location, incident_details, resident_type, status, email
         ) VALUES (
             '$complainant_name', '$complainant_address', '$respondent_name', '$respondent_address', '$witnesses',
-            '$incident_date', '$incident_time', '$incident_location', '$incident_details', '$resident_type', '$status'
+            '$incident_date', '$incident_time', '$incident_location', '$incident_details', '$resident_type', '$status', '$email'
         )";
 
 if ($conn->query($sql) === TRUE) {

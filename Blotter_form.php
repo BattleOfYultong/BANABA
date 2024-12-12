@@ -190,6 +190,11 @@ session_start();
                     <input type="text" id="respondent_name" name="respondent_name" required>
                 </div>
 
+                 <div class="form-group">
+                    <label for="respondent_name">Complainant Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
                 <div class="form-group">
                     <label for="respondent_address">Complained Address</label>
                     <input type="text" id="respondent_address" name="respondent_address" required>
@@ -218,6 +223,7 @@ session_start();
                     <label for="incident_location">Incident Location</label>
                     <input type="text" id="incident_location" name="incident_location" required>
                 </div>
+                
             </div>
 
             <div class="form-row">

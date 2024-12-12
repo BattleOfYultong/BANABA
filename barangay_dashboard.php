@@ -71,7 +71,7 @@ $usersCount = $users_row['count']; // Store the count of residents
     <div class="dropdown-container">
         <a href="blotter_report_list.php"><i class="fas fa-clipboard-list"></i> Blotter List</a>
         <a href="view_clearance.php"><i class="fas fa-hands-helping"></i> Clearance List</a>
-        <a href="#"><i class="fas fa-gavel"></i> Business Permit List</a>
+        <a href="permit_list_history.php"><i class="fas fa-gavel"></i> Business Permit List</a>
     </div>
     
     <a href="concern_list.php"><i class="fas fa-clipboard"></i> Barangay Concerns</a>
