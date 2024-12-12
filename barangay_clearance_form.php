@@ -16,13 +16,14 @@ if (isset($_POST['submit'])) {
     $occupation = $_POST['occupation'];
     $years_residency = $_POST['years_residency'];
     $household_head = $_POST['household_head'];
+    $email = $_POST['email'];
 
     // Prepared statement to prevent SQL injection
-    $stmt = $con->prepare("INSERT INTO barangay_clearance (full_name, address, contact_number, gender, civil_status, job, valid_id_type, id_number, purpose, occupation, years_residency, household_head) 
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $con->prepare("INSERT INTO barangay_clearance (full_name, address, contact_number, gender, civil_status, job, valid_id_type, id_number, purpose, occupation, years_residency, household_head, email) 
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     // Bind parameters
-    $stmt->bind_param("ssssssssssss", $full_name, $address, $contact_number, $gender, $civil_status, $job, $valid_id_type, $id_number, $purpose, $occupation, $years_residency, $household_head);
+    $stmt->bind_param("sssssssssssss", $full_name, $address, $contact_number, $gender, $civil_status, $job, $valid_id_type, $id_number, $purpose, $occupation, $years_residency, $household_head, $email);
 
     // Execute the query
     if ($stmt->execute()) {
@@ -53,6 +54,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Clearance Form</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
@@ -81,6 +83,9 @@ if (isset($_POST['submit'])) {
 
         <label for="contact_number">Contact Number (Mobile or Landline):</label>
         <input type="text" name="contact_number" id="contact_number" required>
+
+        <label for="Email Address">Email Address:</label>
+        <input type="email" name="email" id="email" required>
 
         <label for="gender">Gender:</label>
         <select name="gender" id="gender" required>
@@ -248,7 +253,7 @@ label {
 }
 
 /* Input field styles */
-input[type="text"], input[type="number"], input[type="date"], select, textarea {
+input[type="text"], input[type="number"], input[type="date"], input[type="email"], select, textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;

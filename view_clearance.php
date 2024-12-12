@@ -3,8 +3,10 @@
 include 'clearance_connect.php';
 
 // Fetch all records from the barangay_clearance table
-$sql = "SELECT id, full_name FROM barangay_clearance";
+$sql = "SELECT id, full_name, application_date, email FROM barangay_clearance";
 $result = mysqli_query($con, $sql);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +17,7 @@ $result = mysqli_query($con, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Clearance List</title>
     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* General page styles */
         body {
@@ -109,6 +112,32 @@ $result = mysqli_query($con, $sql);
             text-decoration: underline;
         }
 
+         .action-buttons a {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0 5px;
+            font-size: 14px;
+           
+        }
+         .action-buttons i {
+            margin-right: 5px; /* Space between the icon and text */
+        }
+         .approve {
+            background-color: #4CAF50;
+        }
+         .reject {
+            background-color: blue;
+        }
+         .approve:hover {
+            background-color: #45a049;
+        }
+         .reject:hover {
+            background-color: darkblue;
+        }
+
+
         /* Responsive styling for smaller screens */
         @media (max-width: 768px) {
             .container {
@@ -144,16 +173,28 @@ $result = mysqli_query($con, $sql);
                     <th>ID</th>
                     <th>Full Name</th>
                     <th>Date Created</th>
+                    <th>Email</th>
+                    <th>actions</th>    
                 </tr>";
 
         // Output each row
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
-                    <td>" . $row['id'] . "</td>
-                    <td>" . $row['full_name'] . "</td>
-                    <td><a href='view_clearance_details.php?id=" . $row['id'] . "'>View Details</a></td>
-                </tr>";
-        }
+      while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+    echo "<td>" . htmlspecialchars($row['full_name']) . "</td>";
+    echo "<td>" . htmlspecialchars($row['application_date']) . "</td>";
+     echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+
+    echo "<td class='action-buttons'>";
+    echo "<a onclick='alertmessage()' href='send_email_clearance.php?clearance_id=" . urlencode($row['id']) . "' class='approve'>";
+    echo "<i class='fas fa-check-circle'></i>Send Email";
+    echo "</a>";
+    echo "<a href='view_clearance_details.php?id=" . $row['id'] . "' class='reject'>";
+    echo "<i class='fas fa-eye'></i>View Details";
+    echo "</a>";
+    echo "</td>";
+    echo "</tr>";
+}
 
         // End the table
         echo "</table>";
@@ -167,5 +208,10 @@ $result = mysqli_query($con, $sql);
 
 </div>
 
+<script>
+    function alertmessage(){
+        alert('Email Has Been Sent');
+    }
+</script>
 </body>
 </html>
